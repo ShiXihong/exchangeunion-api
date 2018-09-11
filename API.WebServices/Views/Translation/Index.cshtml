@@ -1,0 +1,150 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<API.WebServices.Models.Translation>
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Whitepaper";
+}
+
+<h2>Deploy translation</h2>
+<div class="field" style="color:red;">
+    Tips:
+    <br />1. Only admin can deploy.
+</div>
+<div class="field" style="text-align:center;margin-top:60px;">
+    @if (UserManager.GetUserName(User).IndexOf("admin@exchangeunion.com") != -1)
+    {
+        <button class="negative ui button" type="button" style="width:200px;" id="translationDeploy"><i class="save icon"></i> Deploy</button>
+    }
+    else
+    {
+        <button class="negative ui button" type="button" style="width:200px;" disabled><i class="save icon"></i> Deploy</button>
+    }
+</div>
+<div class="field" style="margin-top:30px;text-align:center">
+    <div class="translationInfo" style="color:green;display:none">
+        <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+             width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+        <path fill="#FF6700" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">
+        <animateTransform attributeType="xml"
+                          attributeName="transform"
+                          type="rotate"
+                          from="0 25 25"
+                          to="360 25 25"
+                          dur="0.6s"
+                          repeatCount="indefinite" />
+
+
+
+        </path>
+      </svg>
+        <label>deploying, please wait...</label>
+    </div>
+</div>
+
+@*<div class="ui form">
+        <div class="field" style="color:red;">
+            Tips:
+            <br />1. When uploading translation json file, must ensure that the same number and key.
+            <br />2. Can not have same key
+            <br />3. Can use CTRL+F quckily find
+            <br />4. Can't edit translation key
+            <br />5. Can't delete translation
+        </div>
+        <div class="fields two">
+            <div class="field json-zh">
+                <div class="field" style="margin-top:30px;">
+                    <div>
+                        <label for="_upload_zh" class="ui button primary">
+                            <i class="add icon"></i> Chinese translation json upload
+                            <input type="file" id="_upload_zh" style="display:none">
+                        </label>
+                    </div>
+                </div>
+                <div class="field" style="margin-top:20px;">
+                    <a asp-action="Download" asp-route-lang="zh_CN">Download chinese translation json</a>
+                </div>
+                <div class="field" style="margin-top:30px;">
+                    <div class="info" style="color:green;display:none">
+                        <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                             width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                        <path fill="#FF6700" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">
+                        <animateTransform attributeType="xml"
+                                          attributeName="transform"
+                                          type="rotate"
+                                          from="0 25 25"
+                                          to="360 25 25"
+                                          dur="0.6s"
+                                          repeatCount="indefinite" />
+
+        </path>
+      </svg>
+                        <label></label>
+                    </div>
+                </div>
+            </div>
+            <div class="field json-en">
+                <div class="field" style="margin-top:30px;">
+                    <div>
+                        <label for="_upload_en" class="ui button primary">
+                            <i class="add icon"></i> English translation json upload
+                            <input type="file" id="_upload_en" style="display:none">
+                        </label>
+                    </div>
+                </div>
+                <div class="field" style="margin-top:20px;">
+                    <a asp-action="Download" asp-route-lang="en_US">Download english translation json</a>
+                </div>
+                <div class="field" style="margin-top:20px;">
+                    <div class="info" style="color:green;display:none">
+                        <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                             width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                        <path fill="#FF6700" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">
+                        <animateTransform attributeType="xml"
+                                          attributeName="transform"
+                                          type="rotate"
+                                          from="0 25 25"
+                                          to="360 25 25"
+                                          dur="0.6s"
+                                          repeatCount="indefinite" />
+
+        </path>
+      </svg>
+                        <label></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <table class="ui celled table">
+                <thead>
+                    <tr>
+                        <th>Key</th>
+                        <th>Translation</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model.Where(p => p.Language == "en_US"))
+                    {
+                        <tr>
+                            <td rowspan="2">@Html.DisplayFor(modelItem => item.Key)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Value)</td>
+                            <td rowspan="2"><a asp-controller="Translation" asp-action="Edit" asp-route-key="@item.Key">Edit</a></td>
+                        </tr>
+                        <tr>
+                            <td style="border-left:1px solid rgba(34, 36, 38, 0.1)">
+                                @if (Model.Where(p => p.Key == item.Key && p.Language == "zh_CN").SingleOrDefault() != null)
+                                {
+                                    @Model.Where(p => p.Key == item.Key && p.Language == "zh_CN").SingleOrDefault().Value
+
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>*@

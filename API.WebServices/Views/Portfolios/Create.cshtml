@@ -1,0 +1,22 @@
+﻿@model Portfolio
+
+<div class="ui two column grid" style="margin-bottom:10px;">
+    <div class="column"><h2>Create Portfolio</h2></div>
+    <div class="column" style="text-align:right"><a class="primary ui button" asp-action="Index">Back to List</a></div>
+</div>
+<div class="ui form">
+    <form asp-controller="Portfolios" asp-action="Create" method="POST">
+        @Html.Partial("_Form")
+        <div class="field" style="text-align:center;">
+            <button class="ui primary button" type="submit"><i class="save icon"></i>Publish</button>
+        </div>
+    </form>
+</div>
+
+<div>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,88 @@
+﻿@model XUCExchange
+@Html.HiddenFor(m => m.Id)
+
+<div class="field">
+    @Html.LabelFor(model => model.Title)
+    @Html.TextBoxFor(model => model.Title, new { htmlAttributes = new { placeholder = "Title" } })
+    <span asp-validation-for="Title" class="text-danger error" style="color:red"></span>
+</div>
+<div class="select-currency">
+    <div class="field">
+        <div class="ui checked checkbox">
+            @Html.CheckBoxFor(model => model.XUC_BTC)
+            @Html.LabelFor(model => model.XUC_BTC)
+        </div>
+    </div>
+    <div class="field link-input" data-name="XUC_BTC" style="display:none">
+        <label>Link Address</label>
+        @Html.TextBoxFor(model => model.XUC_BTC_Link)
+    </div>
+    <div class="field">
+        <div class="ui checked checkbox">
+            @Html.CheckBoxFor(model => model.XUC_ETH)
+            @Html.LabelFor(model => model.XUC_ETH)
+        </div>
+    </div>
+
+    <div class="field link-input" data-name="XUC_ETH" style="display:none">
+        <label>Link Address</label>
+        @Html.TextBoxFor(model => model.XUC_ETH_Link)
+    </div>
+    <div class="field">
+        <div class="ui checked checkbox">
+            @Html.CheckBoxFor(model => model.XUC_USDT)
+            @Html.LabelFor(model => model.XUC_USDT)
+        </div>
+    </div>
+    <div class="field link-input" data-name="XUC_USDT" style="display:none">
+        <label>Link Address</label>
+        @Html.TextBoxFor(model => model.XUC_USDT_Link)
+    </div>
+    <div class="field">
+        <div class="ui checked checkbox">
+            @Html.CheckBoxFor(model => model.XUC_FIAT)
+            @Html.LabelFor(model => model.XUC_FIAT)
+        </div>
+    </div>
+    <div class="field link-input" data-name="XUC_FIAT" style="display:none">
+        <label>Link Address</label>
+        @Html.TextBoxFor(model => model.XUC_FIAT_Link)
+    </div>
+</div>
+
+<div class="field" style="margin-top:10px;">
+    @Html.LabelFor(model => model.Order)
+    @{
+        List<SelectListItem> statusListItems = new List<SelectListItem>();
+        statusListItems.Add(new SelectListItem { Text = "Active", Value = "Active" });
+        statusListItems.Add(new SelectListItem { Text = "Inactive", Value = "Inactive" });
+    }
+    @Html.DropDownListFor(model => model.Status, statusListItems, new { @class = "ui dropdown" })
+</div>
+
+<div class="field" style="margin-top:10px;">
+    <label>Order</label>
+    @Html.TextBoxFor(model => model.Order)
+</div>
+
+<div class="field js-image-upload ">
+    <div class="field required">
+        <label>Logo<span style="">  (max-width: 150) </span></label>
+        <img class="ui small image" style="width:150px;" src="@Model.Logo">
+        <input id="imageUrlValue" name="Logo" value="@Model.Logo" style="display:none" />
+        <span asp-validation-for="Logo" class="text-danger error" style="color:red"></span>
+    </div>
+    <div class="field">
+        <div>
+            <label for="_upload" class="ui button primary">
+                <i class="add icon"></i> Upload
+                <input type="file" id="_upload" style="display:none">
+            </label>
+        </div>
+    </div>
+    <div class="field">
+        <div class="ui blue progress" data-percent="0" style="display:none">
+            <div class="bar"></div>
+        </div>
+    </div>
+</div>

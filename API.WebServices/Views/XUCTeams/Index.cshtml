@@ -1,0 +1,77 @@
+﻿@model IEnumerable<API.WebServices.Models.XUCTeam>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="ui actions">
+    <a class="ui primary button" asp-action="Create">New</a>
+</div>
+
+
+<table class="ui celled table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ENName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ZHName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ENPosition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ZHPosition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ENDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ZHDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ENName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ZHName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ENPosition)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ZHPosition)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ENDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ZHDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

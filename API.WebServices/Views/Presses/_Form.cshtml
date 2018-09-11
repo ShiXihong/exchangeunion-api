@@ -1,0 +1,99 @@
+﻿@model Press
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@Html.HiddenFor(m => m.Id)
+<div class="two fields">
+    <div class="field required">
+        @Html.LabelFor(model => model.Title)
+        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { placeholder = "Title" } })
+        <span asp-validation-for="Title" class="text-danger error" style="color:red"></span>
+    </div>
+	<div class="field required">
+        @Html.LabelFor(model => model.Link)
+        @Html.EditorFor(model => model.Link, new { htmlAttributes = new { placeholder = "Press Link" }, type = "url" })
+        <span asp-validation-for="Link" class="text-danger error" style="color:red"></span>
+    </div>
+   
+</div>
+<div class="two fields">
+@if (UserManager.GetUserName(User).IndexOf("@etclabs.org") != -1){
+<div class="field">
+        @Html.LabelFor(model => model.Source)
+        @Html.EditorFor(model => model.Source, new { htmlAttributes = new { placeholder = "Press Source" } })
+    </div>
+}else {
+<div class="field required">
+        @Html.LabelFor(model => model.Source)
+        @Html.EditorFor(model => model.Source, new { htmlAttributes = new { placeholder = "Press Source" } })
+        <span asp-validation-for="Source" class="text-danger error" style="color:red"></span>
+    </div>
+}
+    
+    <div class="field">
+        @Html.LabelFor(model => model.Date)
+        <div class="ui calendar datepicker">
+            <div class="ui input left icon">
+                <i class="calendar icon"></i>
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { placeholder = "Press Date" } })
+            </div>
+        </div>
+    </div>
+</div>
+<div class="two fields ">
+@if (UserManager.GetUserName(User).IndexOf("@etclabs.org") == -1){
+    <div class="field">
+        @Html.LabelFor(model => model.Language)
+        @{
+            List<SelectListItem> languageListItems = new List<SelectListItem>();
+            languageListItems.Add(new SelectListItem { Text = "All", Value = "All" });
+            languageListItems.Add(new SelectListItem { Text = "English", Value = "English" });
+            languageListItems.Add(new SelectListItem { Text = "Chinese", Value = "Chinese" });
+        }
+        @Html.DropDownListFor(model => model.Language, languageListItems, new { @class = "ui dropdown" })
+    </div>
+	}else{
+	<div class="field">
+	 @Html.LabelFor(model => model.Language)
+        @{
+            List<SelectListItem> languageListItems = new List<SelectListItem>();
+            languageListItems.Add(new SelectListItem { Text = "All", Value = "All" });
+        }
+        @Html.DropDownListFor(model => model.Language, languageListItems, new { @class = "ui dropdown" })
+		</div>
+	}
+    <div class="field">
+        @Html.LabelFor(model => model.Status)
+        @{
+            List<SelectListItem> statusListItems = new List<SelectListItem>();
+            statusListItems.Add(new SelectListItem { Text = "Active", Value = "Active" });
+            statusListItems.Add(new SelectListItem { Text = "Inactive", Value = "Inactive" });
+        }
+        @Html.DropDownListFor(model => model.Status, statusListItems, new { @class = "ui dropdown" })
+    </div>
+</div>
+<div class="field">
+    <label>Abstract</label>
+    @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { placeholder = "Press Description" } })
+</div>
+<div class="field js-image-upload ">
+    <div class="field required">
+        <label>Press Image 
+		@if (UserManager.GetUserName(User).IndexOf("@etclabs.org") != -1){<span style="">(size: 660 * 400)</span>}else {<span style="">(size: 330 * 180)</span>} </label>
+        <img class="ui small image" style="height:180px;width:auto" src="@Model.ImageUrl">
+        <input id="imageUrlValue" name="ImageUrl" value="@Model.ImageUrl" style="display:none" />
+        <span asp-validation-for="ImageUrl" class="text-danger error" style="color:red"></span>
+    </div>
+    <div class="field">
+        <div>
+            <label for="_upload" class="ui button primary">
+                <i class="add icon"></i> Upload
+                <input type="file" id="_upload" style="display:none">
+            </label>
+        </div>
+    </div>
+    <div class="field">
+        <div class="ui blue progress" data-percent="0" style="display:none">
+            <div class="bar"></div>
+        </div>
+    </div>
+</div>

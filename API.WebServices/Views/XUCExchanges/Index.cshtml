@@ -1,0 +1,86 @@
+﻿@model IEnumerable<API.WebServices.Models.XUCExchange>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>How to get XUC</h2>
+
+<div class="ui actions">
+    <a class="ui primary button" asp-action="Create">New</a>
+</div>
+
+
+<table class="ui celled table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.XUC_BTC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.XUC_ETH)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.XUC_USDT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.XUC_FIAT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+
+                @if (item.XUC_BTC)
+        {
+            <span>Yes(<a href="@Html.DisplayFor(modelItem => item.XUC_BTC_Link)" title="@Html.DisplayFor(modelItem => item.XUC_BTC_Link)" target="_blank">link</a>)</span>
+
+}
+            </td>
+            <td>
+                @if (item.XUC_ETH)
+        {
+            <span>Yes(<a href="@Html.DisplayFor(modelItem => item.XUC_ETH_Link)" title="@Html.DisplayFor(modelItem => item.XUC_ETH_Link)" target="_blank">link</a>)</span>
+
+}
+            </td>
+            <td>
+
+                @if (item.XUC_USDT)
+        {
+            <span>Yes(<a href="@Html.DisplayFor(modelItem => item.XUC_USDT_Link)" title="@Html.DisplayFor(modelItem => item.XUC_USDT_Link)" target="_blank">link</a>)</span>
+
+}
+            </td>
+            <td>
+
+                @if (item.XUC_FIAT)
+        {
+            <span>Yes(<a href="@Html.DisplayFor(modelItem => item.XUC_FIAT_Link)" title="@Html.DisplayFor(modelItem => item.XUC_FIAT_Link)" target="_blank">link</a>)</span>
+
+}
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

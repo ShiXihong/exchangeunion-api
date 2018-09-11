@@ -1,0 +1,42 @@
+﻿@model Transparency
+
+<div class="two fields">
+    <div class="field">
+        @Html.LabelFor(model => model.Address)
+        @Html.TextBoxFor(model => model.Address, new { htmlAttributes = new { placeholder = "Address" } })
+    </div>
+    <div class="field">
+        @Html.LabelFor(model => model.Time)
+        <div class="ui calendar timepicker">
+            <div class="ui input left icon">
+                <i class="calendar icon"></i>
+                @Html.EditorFor(model => model.Time, new { htmlAttributes = new { placeholder = "Time" } })
+            </div>
+        </div>
+    </div>
+</div>
+<div class="two fields">
+    <div class="field">
+        @Html.LabelFor(model => model.Amount)
+        @Html.TextBoxFor(model => model.Amount, new { htmlAttributes = new { type = "number" } })
+    </div>
+    <div class="field">
+        @Html.LabelFor(model => model.Reason)
+        @Html.TextBoxFor(model => model.Reason, new { htmlAttributes = new { type = "number" } })
+    </div>
+</div>
+<div class="two fields">
+    <div class="field">
+        @Html.LabelFor(model => model.TxHash)
+        @Html.TextBoxFor(model => model.TxHash, new { htmlAttributes = new { type = "number" } })
+    </div>
+    <div class="field">
+        @Html.LabelFor(model => model.Active)
+        @{
+        List<SelectListItem> statusListItems = new List<SelectListItem>();
+        statusListItems.Add(new SelectListItem { Text = "Active", Value = "Active" });
+        statusListItems.Add(new SelectListItem { Text = "Inactive", Value = "Inactive" });
+        }
+        @Html.DropDownListFor(model => model.Active, statusListItems, new { @class = "ui dropdown" })
+    </div>
+</div>

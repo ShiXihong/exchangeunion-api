@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Whitepaper";
+}
+
+<h2>Whitepaper</h2>
+<div class="ui form">
+    <div class="field pdf-en">
+        <div class="field required">
+            <label>English Whitepaper<span style="color:red">(max size： 10MB)</span><a href="~/pdf/en/ExchangeUnion-WhitePaper.pdf" target="_blank" style="margin-left:20px;">Download PDF</a></label>
+            <object data="~/pdf/en/ExchangeUnion-WhitePaper.pdf" type="application/pdf" width="100%" height="600px">
+                <p>This browser does not support PDFs. Please download the PDF to view it: <a href="~/pdf/en/ExchangeUnion-WhitePaper.pdf" target="_blank">Download PDF</a>.</p>
+            </object>
+            <input type="hidden" class="uploadpdf" value="en" />
+        </div>
+        <div class="field" style="margin-top:30px;">
+            <div>
+                <label for="_upload_en" class="ui button primary">
+                    <i class="add icon"></i> English Whitepape Upload
+                    <input type="file" id="_upload_en" style="display:none">
+                </label>
+            </div>
+        </div>
+        <div class="field" style="margin-top:30px;">
+            <div>
+                <div class="info" style="color:red"></div>
+            </div>
+        </div>
+        <div class="field">
+            <div class="ui blue progress" data-percent="0" style="display:none">
+                <div class="bar"></div>
+            </div>
+        </div>
+    </div>
+    <div class="field pdf-zh">
+        <div class="field required">
+            <label>Chinese Whitepaper<span style="color:red">(max size： 10MB)</span><a href="~/pdf/zh/ExchangeUnion-WhitePaper.pdf" target="_blank" style="margin-left:20px;">Download PDF</a></label>
+            <object data="~/pdf/zh/ExchangeUnion-WhitePaper.pdf" type="application/pdf" width="100%" height="600px">
+                <p>This browser does not support PDFs. Please download the PDF to view it: <a href="~/pdf/zh/ExchangeUnion-WhitePaper.pdf" target="_blank">Download PDF</a>.</p>
+            </object>
+            <input type="hidden" class="uploadpdf" value="zh" />
+        </div>
+        <div class="field" style="margin-top:30px;">
+            <div>
+                <label for="_upload_zh" class="ui button primary">
+                    <i class="add icon"></i> Chinese Whitepaper Upload
+                    <input type="file" id="_upload_zh" style="display:none" data-pdf="true">
+                </label>
+            </div>
+        </div>
+        <div class="field" style="margin-top:30px;">
+            <div>
+                <div class="info" style="color:red"></div>
+            </div>
+        </div>
+        <div class="field">
+            <div class="ui blue progress" data-percent="0" style="display:none">
+                <div class="bar"></div>
+            </div>
+        </div>
+    </div>
+    </div>

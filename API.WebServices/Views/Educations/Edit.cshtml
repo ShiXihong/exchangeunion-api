@@ -1,0 +1,41 @@
+﻿@model Education
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="ui two column grid" style="margin-bottom:10px;">
+    <div class="column"><h2>Edit Education</h2></div>
+    <div class="column" style="text-align:right"><a class="primary ui button" asp-action="Index">Back to List</a></div>
+</div>
+
+<div class="ui form">
+    <form asp-controller="Educations" asp-action="Edit" method="post">
+        @Html.Partial("_Form")
+        <div class="field" style="text-align:center">
+            <button class="ui primary button" type="submit"><i class="save icon"></i> Save</button>
+            <button class="negative ui button"><i class="trash icon"></i> Delete</button>
+        </div>
+    </form>
+</div>
+
+<div class="ui small confirm modal">
+    <div class="ui icon header">
+        <p>Do you really want to delete this record?</p>
+    </div>
+    <div class="actions">
+        <form asp-area="Admin" asp-controller="Educations" asp-action="Delete" method="POST">
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <div class="ui red cancel button">
+                <i class="remove icon"></i> No
+            </div>
+            <div class="ui green ok button">
+                <i class="checkmark icon"></i> Yes
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

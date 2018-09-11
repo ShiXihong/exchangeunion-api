@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Translation>
+
+@{
+    ViewData["Title"] = "Translation Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="ui two column grid" style="margin-bottom:10px;">
+    <div class="column"><h2>Translation Edit</h2></div>
+    <div class="column" style="text-align:right"><a class="primary ui button" asp-action="Index">Back to List</a></div>
+</div>
+
+<div class="ui form">
+    <div class="field">
+        <label>Translation Key</label>
+        <input type="text" style="background-color:#eee" readonly value="@Model.Where(p => p.Language == "zh_CN").SingleOrDefault().Key" />
+    </div>
+
+    <div class="fields two">
+        @foreach (var item in Model)
+        {
+            <div class="field @item.Language" data-id="@item.Id" data-key="@item.Key">
+                @if (item.Language == "zh_CN")
+                {
+                    <label>Chinese translation</label>
+                }
+                else if (item.Language == "en_US")
+                {
+                    <label>English translation</label>
+                }
+                <textarea>@item.Value</textarea>
+            </div>
+        }
+    </div>
+    <div class="field" style="text-align:center">
+        <button class="ui primary button" type="button" id="update_translation"><i class="save icon"></i> Update</button>
+    </div>
+    <div class="field" style="text-align:center">
+        <label id="update_info"></label>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+﻿@model Portfolio
+@Html.HiddenFor(m => m.Id)
+
+<div class="two fields">
+    <div class="field required">
+        @Html.LabelFor(model => model.Title)
+        @Html.TextBoxFor(model => model.Title, new { htmlAttributes = new { placeholder = "Title" } })
+        <span asp-validation-for="Title" class="text-danger error" style="color:red"></span>
+    </div>
+    <div class="field required">
+        @Html.LabelFor(model => model.Link)
+        @Html.TextBoxFor(model => model.Link, new { htmlAttributes = new { placeholder = "Link" } })
+        <span asp-validation-for="Link" class="text-danger error" style="color:red"></span>
+    </div>
+</div>
+<div class="field required">
+    @Html.LabelFor(model => model.Description)
+    @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { placeholder = "Description" } })
+</div>
+<div class="two fields">
+    <div class="field required">
+        @Html.LabelFor(model => model.Category)
+        @{
+            List<SelectListItem> categoryListItems = new List<SelectListItem>();
+            categoryListItems.Add(new SelectListItem { Text = "Exchange", Value = "Exchange" });
+            categoryListItems.Add(new SelectListItem { Text = "Use Case", Value = "UseCase" });
+            categoryListItems.Add(new SelectListItem { Text = "Infrastructure", Value = "Infrastructure" });
+            categoryListItems.Add(new SelectListItem { Text = "Digital Assets", Value = "DigitalAssets" });
+        }
+        @Html.DropDownListFor(model => model.Category, categoryListItems, new { @class = "ui dropdown" })
+    </div>
+    <div class="field">
+        @Html.LabelFor(model => model.Status)
+        @{
+            List<SelectListItem> statusListItems = new List<SelectListItem>();
+            statusListItems.Add(new SelectListItem { Text = "Active", Value = "Active" });
+            statusListItems.Add(new SelectListItem { Text = "Inactive", Value = "Inactive" });
+        }
+        @Html.DropDownListFor(model => model.Status, statusListItems, new { @class = "ui dropdown" })
+    </div>
+</div>
+<div class="field">
+    <div class="ui checked checkbox">
+        @Html.CheckBoxFor(model => model.ShowHome)
+        @Html.LabelFor(model => model.ShowHome)
+    </div>
+</div>
+
+
+<div class="field js-image-upload ">
+    <div class="field required">
+        <label>Logo Image<span style="">  (150 * 100) </span></label>
+        <img class="ui small image" style="max-height:100px; width:auto" src="@Model.Logo">
+        <input id="imageUrlValue" name="Logo" value="@Model.Logo" style="display:none" />
+        <span asp-validation-for="Logo" class="text-danger error" style="color:red"></span>
+    </div>
+    <div class="field">
+        <div>
+            <label for="_upload" class="ui button primary">
+                <i class="add icon"></i> Upload
+                <input type="file" id="_upload" style="display:none">
+            </label>
+        </div>
+    </div>
+    <div class="field">
+        <div class="ui blue progress" data-percent="0" style="display:none">
+            <div class="bar"></div>
+        </div>
+    </div>
+</div>

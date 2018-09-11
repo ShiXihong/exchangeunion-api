@@ -1,0 +1,100 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using API.WebServices.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CMS</title>
+
+    <link rel="stylesheet" href="~/lib/semantic/dist/semantic.css" />
+    <link rel="stylesheet" href="~/lib/semantic-ui-calendar/dist/calendar.min.css" />
+    <link rel="stylesheet" href="~/lib/froala-wysiwyg-editor/css/froala_style.min.css" />
+    <link rel="stylesheet" href="~/lib/froala-wysiwyg-editor/css/froala_editor.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/lib/datatables/media/css/dataTables.semanticui.min.css" />
+    <link rel="stylesheet" href="~/lib/datatables-rowreorder/css/rowReorder.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+</head>
+<body>
+    <div class="ui large top pointing fixed menu">
+        <div class="ui container">
+            <a class="toc item">
+                <i class="sidebar icon"></i>
+                <span class="sr-only">Toggle Navigation</span>
+            </a>
+            <a href="/Presses" class="header item">CMS</a>
+            @if (SignInManager.IsSignedIn(User))
+    {
+        <a class="blue item" asp-controller="Presses" asp-action="Index" title="Press">Press</a>
+}
+
+            @if (!String.IsNullOrEmpty(UserManager.GetUserName(User)))
+    {
+        @if (UserManager.GetUserName(User).IndexOf("@exchangeunion.com") != -1)
+{
+        <a class="blue item" asp-controller="XUCTeams" asp-action="Index" title="Team">Team</a>
+        <a class="blue item" asp-controller="XUCExchanges" asp-action="Index" title="Exchange">Exchange</a>
+        <a class="blue item" asp-controller="Whitepaper" asp-action="Index" title="Whitepaper">Whitepaper</a>
+        <a class="blue item" asp-controller="Translation" asp-action="Index" title="Translation">Translation</a>
+        <a class="blue item" asp-controller="Transparencies" asp-action="Index" title="Translation">Transparencies</a>
+
+
+}
+}
+
+            @if (UserManager.GetUserName(User) == "admin@digitalfinancegroup.net")
+    {
+        <a class="blue item" asp-controller="DFGTeams" asp-action="Index" title="Team">Team</a>
+        <a class="blue item" asp-controller="Portfolios" asp-action="Index" title="Press">Portfolio</a>
+
+}
+
+            @if (UserManager.GetUserName(User) == "admin@etclabs.org")
+    {
+        <a class="blue item" asp-controller="Events" asp-action="Index" title="Team">Events</a>
+        <a class="blue item" asp-controller="Educations" asp-action="Index" title="Press">Eductaion</a>
+
+}
+            @await Html.PartialAsync("_LoginPartial")
+        </div>
+    </div>
+
+    <div class="pusher">
+        <div class="ui container content">
+            @if (@ViewData["Message"] != null)
+            {
+                <div class="ui message">
+                    <i class="close icon"></i>
+                    <div class="header"> Message </div>
+                    <p>@ViewData["Message"]</p>
+                </div>
+            }
+            @RenderBody()
+        </div>
+        <div class="ui vertical footer segment">
+            <div class="ui container">
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/semantic/dist/semantic.js"></script>
+    <script src="~/lib/semantic-ui-calendar/dist/calendar.min.js"></script>
+    <script src="~/lib/froala-wysiwyg-editor/js/froala_editor.pkgd.min.js"></script>
+    <script src="~/lib/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+    <script src="~/lib/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+    <script src="~/lib/blueimp-file-upload/js/jquery.fileupload.js"></script>
+    <script src="~/lib/datatables/media/js/jquery.dataTables.js"></script>
+    <script src="~/lib/datatables-rowreorder/js/dataTables.rowReorder.js"></script>
+    <script src="~/js/site.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
